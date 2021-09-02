@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    volumes:
+      - /backend/node_modules
+      - ./backend:/backend
+    environment:
+      - MONGO_CONNEXION_URI=
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - /frontend/node_modules
+      - ./frontend:/frontend
+    environment:
+      - BACKEND_SERVER_URL
