@@ -5,20 +5,33 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    restart: unless-stopped
+    restart: always
     ports:
       - "8090:8090"
     volumes:
       - /backend/node_modules
       - ./backend:/backend
     environment:
-      - MONGO_CONNEXION_URI=
+      - MONGO_URI
+    depends_on: 
+      - mongo_db
+    
+  mongo_db:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
+    volumes:
+      - mongo_data:/data/db
   
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    restart: unless-stopped
+    restart: always
     ports:
       - "3000:3000"
     volumes:
@@ -26,3 +39,8 @@ services:
       - ./frontend:/frontend
     environment:
       - BACKEND_SERVER_URL
+    depends_on: 
+      - backend
+
+volumes:
+  mongo_data:
