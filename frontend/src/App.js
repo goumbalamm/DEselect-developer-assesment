@@ -13,11 +13,11 @@ import NewStudent from './pages/NewStudent';
 import NavBar from './components/NavBar';
 import Container from 'react-bootstrap/Container';
 
-function App() {
+function App() { 
   const saveNewStudent = (data) => {
     const config = {
       method: 'post',
-      url: process.env.REACT_APP_BACKEND_URL,
+      url: process.env.REACT_APP_BACKEND_URL + '/new',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -26,6 +26,16 @@ function App() {
     axios(config)
     .then((resp) => console.log(resp))
     .catch((err) => console.log(err));
+  }
+  const loadData = (filter='') => {
+    const config = {
+      method: 'get',
+      url: process.env.REACT_APP_BACKEND_URL + '/?' + filter,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    return axios(config);
   }
   return (
     <Router>
@@ -38,7 +48,7 @@ function App() {
             <NewStudent saveNewStudent={saveNewStudent} />
           </Route>
           <Route path='/home'>
-            <Home />
+            <Home loadData={loadData}/>
           </Route >
           <Route path='/'>
             <Redirect to="/home" />

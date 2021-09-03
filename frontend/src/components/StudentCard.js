@@ -1,10 +1,10 @@
 import Card from 'react-bootstrap/Card';
 
 
-const StudentCard = () => {
+const StudentCard = ({lastName, firstName, age}) => {
     return (
         <Card className="mt-1">
-            <Card.Body>Tim Ferris (36)</Card.Body>
+            <Card.Body>{firstName} {lastName} ({age})</Card.Body>
         </Card>
     );
 }
