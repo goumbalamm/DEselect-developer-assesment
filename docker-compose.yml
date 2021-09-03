@@ -38,7 +38,8 @@ services:
       - /frontend/node_modules
       - ./frontend:/frontend
     environment:
-      - BACKEND_SERVER_URL
+      - REACT_APP_BACKEND_URL
+      - HTTPS=true
     depends_on: 
       - backend
 
