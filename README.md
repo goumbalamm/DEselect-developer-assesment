@@ -1,4 +1,4 @@
-# DEselect-developer-assesment
+Developer-assesment
 
 ### You can test easily by using docker compose:
 - `docker-compose up`
