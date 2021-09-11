@@ -1,4 +1,4 @@
-Developer-assesment
+A simple React and Node.js app in a docker environment
 
 ### You can test easily by using docker compose:
 - `docker-compose up`
